@@ -52,7 +52,7 @@ public class MemberService {
 	}
 
 	@Transactional(readOnly=true)
-	public boolean isExistedStudentId(String studentId){
+	public boolean isExistedStudentId(Integer studentId){
 		return memberRepository.existsByStudentId(studentId);
 	}
 	@Transactional(readOnly = true)

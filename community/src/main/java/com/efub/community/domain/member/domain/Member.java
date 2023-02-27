@@ -33,7 +33,7 @@ public class Member extends BaseTimeEntity {
 	private String nickname;
 
 	@Column(nullable = false, updatable = false)
-	private String studentId;
+	private Integer studentId;
 	@Column(nullable = false, updatable = false)
 	private String university;
 
@@ -42,7 +42,7 @@ public class Member extends BaseTimeEntity {
 
 
 	@Builder
-	public Member(String email, String encodedPassword, String nickname, String studentId, String university) {
+	public Member(String email, String encodedPassword, String nickname,Integer studentId, String university) {
 		this.email = email;
 		this.encodedPassword = encodedPassword;
 		this.nickname = nickname;

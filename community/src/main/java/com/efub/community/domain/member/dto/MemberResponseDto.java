@@ -13,7 +13,7 @@ public class MemberResponseDto {
 	private String email;
 	private String nickname;
 	private String university;
-	private String studentId;
+	private Integer studentId;
 
 	@Builder
 	public MemberResponseDto(Member member) {

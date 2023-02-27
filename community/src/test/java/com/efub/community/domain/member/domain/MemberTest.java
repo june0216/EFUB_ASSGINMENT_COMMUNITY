@@ -16,7 +16,7 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		String studentId = "1989001";
+		Integer studentId = 1989001;
 		MemberStatus status = REGISTERED;
 
 		Member member = createMember(email, nickname, encodedPassword, university,studentId);
@@ -35,7 +35,7 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		String studentId = "1989001";
+		Integer studentId = 1989001;
 		String newNickname = "새테스트계정";
 
 		Member member = createMember(email, nickname, encodedPassword, university, studentId);
@@ -52,7 +52,7 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		String studentId = "1989001";
+		Integer studentId = 1989001;
 		MemberStatus status = UNREGISTERED;
 
 		Member member = createMember(email, nickname, encodedPassword, university,studentId);
@@ -68,7 +68,7 @@ class MemberTest {
 
 
 
-	private Member createMember(String email, String name, String encodedPassword, String university, String studentId) {
+	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentId) {
 		Member member = Member.builder()
 				.email(email)
 				.nickname(name)
