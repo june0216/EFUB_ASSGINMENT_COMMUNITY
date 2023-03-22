@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Getter
@@ -29,7 +30,7 @@ public class SignUpRequestDto {
 	@NotBlank(message = "학교 이름은 필수입니다. ")
 	private String university;
 
-	@NotBlank(message = "학번은 필수 입니다. ")
+	@NotNull(message = "학번은 필수입니다.")
 	private Integer studentNo;
 
 	@Builder
