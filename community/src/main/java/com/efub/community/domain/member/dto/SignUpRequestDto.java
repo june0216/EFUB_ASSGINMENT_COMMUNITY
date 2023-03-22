@@ -29,16 +29,15 @@ public class SignUpRequestDto {
 	@NotBlank(message = "학교 이름은 필수입니다. ")
 	private String university;
 
-	@NotBlank(message = "학번은 필수 입니다. ")
-	private Integer studentId;
+	private Integer studentNo;
 
 	@Builder
-	public SignUpRequestDto(String email, String password, String nickname, String university, Integer studentId) {
+	public SignUpRequestDto(String email, String password, String nickname, String university, Integer studentNo) {
 		this.email = email;
 		this.password = password;
 		this.nickname = nickname;
 		this.university = university;
-		this.studentId = studentId;
+		this.studentNo = studentNo;
 	}
 
 	public Member toEntity(String encodedPassword){
@@ -47,7 +46,7 @@ public class SignUpRequestDto {
 				.encodedPassword(encodedPassword)
 				.nickname(this.nickname)
 				.university(this.university)
-				.studentId(this.studentId)
+				.studentNo(this.studentNo)
 				.build();
 	}
 

@@ -18,9 +18,9 @@ public class MemberResponseDto {
 	@Builder
 	public MemberResponseDto(Member member) {
 		this.accountId = member.getMemberId();
-		this.email = getEmail();
-		this.nickname = getNickname();
-		this.university = getUniversity();
-		this.studentId = getStudentId();
+		this.email = member.getEmail();
+		this.nickname = member.getNickname();
+		this.university = member.getUniversity();
+		this.studentId = member.getStudentNo();
 	}
 }

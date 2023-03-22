@@ -23,15 +23,22 @@ public class Board extends BaseTimeEntity {
 	private Long boardId;
 
 	private String name;
+	private String description;
 
 	@OneToOne
 	private Member owner;
 
-	@OneToMany(mappedBy = "post")
-	private List<Post> postList = new ArrayList<>();
 
 	@Builder
-	public Board(String name) {
+	public Board(String name, String description, Member owner) {
 		this.name = name;
+		this.description = description;
+		this.owner = owner;
+
+	}
+	public void updateBoard(Member member, String description)
+	{
+		this.owner = member;
+		this.description = description;
 	}
 }

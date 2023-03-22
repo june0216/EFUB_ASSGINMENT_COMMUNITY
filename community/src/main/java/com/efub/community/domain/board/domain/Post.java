@@ -23,31 +23,29 @@ public class Post extends BaseTimeEntity {
 	@Column(name = "post_id")
 	private Long postId;
 
-	@Column(length = 500, nullable = false)
-	private String title;
-
 	@Column(columnDefinition = "TEXT")// @NotNull은 @Column(nullable=false)의 역할도 같이 하므로 생략
 	private String content;
 
 	@ManyToOne
-	@JoinColumn(name = "post_id", updatable = false)
+	@JoinColumn(name = "post_id", insertable = false, updatable = false)
 	private Board board;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", updatable = false)
+	@JoinColumn(name = "member_id")
 	private Member writer;
+
+	private boolean anonymous;
 
 
 	@Builder
-	public Post(String title, String content, Member writer) {
-		this.title = title;
+	public Post(String content, Member writer, Boolean anonymous) {
 		this.content = content;
 		this.writer = writer;
+		this.anonymous = anonymous;
 	}
 
-	public void updatePost(String title, String content)
+	public void updatePost(String content)
 	{
-		this.title = title;
 		this.content = content;
 	}
 

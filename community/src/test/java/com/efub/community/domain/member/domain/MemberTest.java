@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static com.efub.community.domain.member.domain.MemberStatus.REGISTERED;
 import static com.efub.community.domain.member.domain.MemberStatus.UNREGISTERED;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemberTest {
 
@@ -25,7 +24,7 @@ class MemberTest {
 		assertThat(member.getNickname()).isEqualTo(nickname);
 		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
 		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentId()).isEqualTo(studentId);
+		assertThat(member.getStudentNo()).isEqualTo(studentId);
 		assertThat(member.getStatus()).isEqualTo(status);
 	}
 
@@ -35,10 +34,10 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		Integer studentId = 1989001;
+		Integer studentNo = 1989001;
 		String newNickname = "새테스트계정";
 
-		Member member = createMember(email, nickname, encodedPassword, university, studentId);
+		Member member = createMember(email, nickname, encodedPassword, university, studentNo);
 
 		member.updateMember(newNickname);
 
@@ -52,17 +51,17 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		Integer studentId = 1989001;
+		Integer studentNo = 1989001;
 		MemberStatus status = UNREGISTERED;
 
-		Member member = createMember(email, nickname, encodedPassword, university,studentId);
+		Member member = createMember(email, nickname, encodedPassword, university,studentNo);
 		member.withdraw();
 
 		assertThat(member.getEmail()).isEqualTo(email);
 		assertThat(member.getNickname()).isEqualTo(nickname);
 		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
 		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentId()).isEqualTo(studentId);
+		assertThat(member.getStudentNo()).isEqualTo(studentNo);
 		assertThat(member.getStatus()).isEqualTo(status);
 	}
 
@@ -74,7 +73,7 @@ class MemberTest {
 				.nickname(name)
 				.encodedPassword(encodedPassword)
 				.university(university)
-				.studentId(studentId)
+				.studentNo(studentId)
 				.build();
 		return member;
 	}
