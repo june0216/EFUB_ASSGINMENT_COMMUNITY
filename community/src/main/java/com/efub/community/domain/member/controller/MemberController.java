@@ -29,7 +29,7 @@ public class MemberController {
 	}
 	@GetMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public MemberResponseDto getAccount(@PathVariable Long memberId)
+	public MemberResponseDto getMember(@PathVariable Long memberId)
 	{
 		Member findMember = memberService.findById(memberId);
 		return new MemberResponseDto(findMember);

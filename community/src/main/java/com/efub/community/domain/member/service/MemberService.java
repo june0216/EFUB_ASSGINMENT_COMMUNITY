@@ -19,8 +19,11 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 
 	public Long signUp(SignUpRequestDto requestDto){
-		if (isExistedStudentId(requestDto.getStudentId())){
-			throw new IllegalArgumentException();
+		if (isExistedStudentNo(requestDto.getStudentNo())){
+			throw new IllegalArgumentException("이미 존재하는 학번입니다. " + String.valueOf(requestDto.getStudentNo()));
+		}
+		if (isExistedNickname(requestDto.getNickname())){
+			throw new IllegalArgumentException("중복된 닉네임이 있습니다. " + requestDto.getNickname());
 		}
 		String encodedPassword = requestDto.getPassword();
 		Member member = memberRepository.save(requestDto.toEntity(encodedPassword));
@@ -52,8 +55,8 @@ public class MemberService {
 	}
 
 	@Transactional(readOnly=true)
-	public boolean isExistedStudentId(String studentId){
-		return memberRepository.existsByStudentId(studentId);
+	public boolean isExistedStudentNo(Integer studentNo){
+		return memberRepository.existsByStudentNo(studentNo);
 	}
 	@Transactional(readOnly = true)
 	public boolean isExistedNickname(String nickname){
