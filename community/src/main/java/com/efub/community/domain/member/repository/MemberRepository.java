@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 	Optional<Member> findByMemberId(Long memberId);
-	Boolean existsByStudentId(Integer studentId);
+	Boolean existsByStudentNo(Integer studentNo);
 	Boolean existsByNickname(String nickname);
 }
