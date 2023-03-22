@@ -67,13 +67,15 @@ class MemberTest {
 
 
 
-	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentId) {
+	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentNo) {
 		Member member = Member.builder()
 				.email(email)
 				.nickname(name)
 				.encodedPassword(encodedPassword)
 				.university(university)
-				.studentNo(studentId)
+
+				.studentNo(studentNo)
+
 				.build();
 		return member;
 	}
