@@ -13,14 +13,14 @@ public class MemberResponseDto {
 	private String email;
 	private String nickname;
 	private String university;
-	private Integer studentId;
+	private Integer studentNo;
 
 	@Builder
 	public MemberResponseDto(Member member) {
 		this.accountId = member.getMemberId();
-		this.email = getEmail();
-		this.nickname = getNickname();
-		this.university = getUniversity();
-		this.studentId = getStudentId();
+		this.email = member.getEmail();
+		this.nickname = member.getNickname();
+		this.university = member.getUniversity();
+		this.studentNo = member.getStudentNo();
 	}
 }

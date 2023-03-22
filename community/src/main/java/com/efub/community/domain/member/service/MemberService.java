@@ -32,6 +32,9 @@ public class MemberService {
 
 
 	public Long update(Long memberId, MemberUpdateRequestDto requestDto){
+		if (isExistedNickname(requestDto.getNickname())){
+			throw new IllegalArgumentException("중복된 닉네임이 있습니다. " + requestDto.getNickname());
+		}
 		Member member = findById(memberId);
 		member.updateMember(requestDto.getNickname());
 		return member.getMemberId();
