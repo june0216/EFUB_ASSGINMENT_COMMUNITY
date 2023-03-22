@@ -13,7 +13,7 @@ public class MemberResponseDto {
 	private String email;
 	private String nickname;
 	private String university;
-	private Integer studentId;
+	private Integer studentNo;
 
 	@Builder
 	public MemberResponseDto(Member member) {
@@ -21,6 +21,6 @@ public class MemberResponseDto {
 		this.email = member.getEmail();
 		this.nickname = member.getNickname();
 		this.university = member.getUniversity();
-		this.studentId = member.getStudentNo();
+		this.studentNo = member.getStudentNo();
 	}
 }
