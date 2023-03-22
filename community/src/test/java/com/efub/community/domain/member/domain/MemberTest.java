@@ -24,7 +24,7 @@ class MemberTest {
 		assertThat(member.getNickname()).isEqualTo(nickname);
 		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
 		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentId()).isEqualTo(studentId);
+		assertThat(member.getStudentNo()).isEqualTo(studentId);
 		assertThat(member.getStatus()).isEqualTo(status);
 	}
 
@@ -51,29 +51,29 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		Integer studentId = 1989001;
+		Integer studentNo = 1989001;
 		MemberStatus status = UNREGISTERED;
 
-		Member member = createMember(email, nickname, encodedPassword, university,studentId);
+		Member member = createMember(email, nickname, encodedPassword, university,studentNo);
 		member.withdraw();
 
 		assertThat(member.getEmail()).isEqualTo(email);
 		assertThat(member.getNickname()).isEqualTo(nickname);
 		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
 		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentId()).isEqualTo(studentId);
+		assertThat(member.getStudentNo()).isEqualTo(studentNo);
 		assertThat(member.getStatus()).isEqualTo(status);
 	}
 
 
 
-	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentId) {
+	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentNo) {
 		Member member = Member.builder()
 				.email(email)
 				.nickname(name)
 				.encodedPassword(encodedPassword)
 				.university(university)
-				.studentId(studentId)
+				.studentNo(studentNo)
 				.build();
 		return member;
 	}
