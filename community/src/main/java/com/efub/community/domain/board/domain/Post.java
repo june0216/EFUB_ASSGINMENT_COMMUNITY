@@ -38,22 +38,14 @@ public class Post extends BaseTimeEntity {
 
 
 	@Builder
-	public Post(String content, Member writer, Boolean anonymous) {
+	public Post(String content, Member writer, Boolean anonymous, Board board) {
 		this.content = content;
 		this.writer = writer;
 		this.anonymous = anonymous;
+		this.board = board;
 	}
 
 
-	protected void setBoard(Board board) {
-		if(this.board !)
-		{
-			this.post.getCommentList().remove(this);
-
-		}
-		this.post = post;
-		post.getCommentList().add(this);
-	}
 
 	public void updatePost(String content)
 	{

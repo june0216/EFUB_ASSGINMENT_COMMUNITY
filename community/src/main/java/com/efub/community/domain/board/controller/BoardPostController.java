@@ -29,7 +29,7 @@ public class BoardPostController {
 
 	@PostMapping("/{boardId}/posts")
 	public PostResponseDto createPost(@PathVariable final Long boardId, @RequestBody @Valid final PostRequestDto requestDto) {
-		Long id = postService.create(requestDto);
+		Long id = postService.create(boardId, requestDto);
 		Post post = postService.findById(id);
 		return PostResponseDto.of(post);
 	}

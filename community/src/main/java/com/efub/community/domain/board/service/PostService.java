@@ -23,10 +23,11 @@ public class PostService {
 	private final BoardService boardService;
 
 
-	public Long create(PostRequestDto requestDto) {
+	public Long create(Long boardId, PostRequestDto requestDto) {
 		Member member = memberService.findById(requestDto.getMemberId());
-		Post board = postRepository.save(requestDto.toEntity(member));
-		return board.getPostId();
+		Board board = boardService.findById(boardId);
+		Post post = postRepository.save(requestDto.toEntity(member, board));
+		return post.getPostId();
 	}
 
 
