@@ -21,20 +21,6 @@ import java.util.List;
 public class PostController {
 	private final PostService postService;
 
-	@PostMapping
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public PostResponseDto create(@RequestBody @Valid final PostRequestDto requestDto) {
-		Long id = postService.create(requestDto);
-		Post post = postService.findById(id);
-		return PostResponseDto.of(post);
-	}
-
-	@GetMapping
-	@ResponseStatus(value = HttpStatus.OK)// 전체 조회
-	public PostListResponseDto readPostList() {
-		List<Post> postList = postService.findAllDesc();
-		return PostListResponseDto.of(postList);
-	}
 
 
 	@GetMapping("/{postId}")
@@ -46,7 +32,7 @@ public class PostController {
 
 	@PutMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public PostResponseDto update(@PathVariable final Long postId, @RequestBody final PostRequestDto requestDto) {
+	public PostResponseDto updatePost(@PathVariable final Long postId, @RequestBody final PostRequestDto requestDto) {
 		postService.update(postId, requestDto);
 		Post post = postService.findById(postId);
 		return PostResponseDto.of(post);
@@ -54,7 +40,7 @@ public class PostController {
 
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String delete(@PathVariable final Long postId) {
+	public String deletePost(@PathVariable final Long postId) {
 		postService.delete(postId);
 		return "성공적으로 삭제되었습니다.";
 	}

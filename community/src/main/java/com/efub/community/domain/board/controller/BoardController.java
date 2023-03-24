@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 	private final BoardService boardService;
-	private final PostService postService;
+
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
@@ -33,7 +33,7 @@ public class BoardController {
 
 	@GetMapping("/{boardId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public BoardListResponseDto.SingleBoard updateBoard(@PathVariable final Long boardId) {
+	public BoardListResponseDto.SingleBoard readBoard(@PathVariable final Long boardId) {
 		Board board = boardService.findById(boardId);
 		return BoardListResponseDto.SingleBoard.of(board);
 	}
@@ -45,12 +45,7 @@ public class BoardController {
 		return BoardListResponseDto.of(boardList);
 	}
 
-	@GetMapping("/{boardId}/posts")
-	public PostListResponseDto readPostList(@PathVariable final Long boardId) {
-		Board board = boardService.findById(boardId);
-		List<Post> postList = postService.findPostsByBoard(board);
-		return PostListResponseDto.of(postList);
-	}
+
 
 	@PutMapping("/{boardId}")
 	@ResponseStatus(value = HttpStatus.OK)
