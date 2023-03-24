@@ -34,10 +34,10 @@ class MemberTest {
 		String nickname = "테스트계정";
 		String encodedPassword = "encodedPassword";
 		String university = "이화여자대학교";
-		Integer studentId = 1989001;
+		Integer studentNo = 1989001;
 		String newNickname = "새테스트계정";
 
-		Member member = createMember(email, nickname, encodedPassword, university, studentId);
+		Member member = createMember(email, nickname, encodedPassword, university, studentNo);
 
 		member.updateMember(newNickname);
 
@@ -73,6 +73,7 @@ class MemberTest {
 				.nickname(name)
 				.encodedPassword(encodedPassword)
 				.university(university)
+
 				.studentNo(studentNo)
 				.build();
 		return member;
