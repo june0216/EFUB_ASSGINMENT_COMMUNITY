@@ -4,6 +4,7 @@ import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.member.domain.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,11 @@ public class PostRequestDto {
 
 	private boolean anonymous;
 
+	@Builder
+	public PostRequestDto(String content, boolean anonymous) {
+		this.content = content;
+		this.anonymous = anonymous;
+	}
 
 	public Post toEntity(Member writer, Board board) {
 		return Post.builder()
