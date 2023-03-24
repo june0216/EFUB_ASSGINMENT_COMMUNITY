@@ -75,7 +75,6 @@ class MemberTest {
 				.university(university)
 
 				.studentNo(studentNo)
-
 				.build();
 		return member;
 	}

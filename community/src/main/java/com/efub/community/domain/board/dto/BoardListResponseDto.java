@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BoardListResponseDto {
-	private List<BoardListResponseDto.SingleBoard> posts;
+	private List<BoardListResponseDto.SingleBoard> boards;
 	private Integer count;
 
 	@Getter
@@ -46,7 +46,7 @@ public class BoardListResponseDto {
 
 	public static BoardListResponseDto of(List<Board> boardList) {
 		return BoardListResponseDto.builder()
-				.posts(boardList.stream().map(BoardListResponseDto.SingleBoard::of).collect(Collectors.toList()))
+				.boards(boardList.stream().map(BoardListResponseDto.SingleBoard::of).collect(Collectors.toList()))
 				.count(boardList.size())
 				.build();
 	}
