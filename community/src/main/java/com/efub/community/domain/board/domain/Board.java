@@ -25,7 +25,8 @@ public class Board extends BaseTimeEntity {
 	private String name;
 	private String description;
 
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "owner_id")
 	private Member owner;
 
 
@@ -41,4 +42,5 @@ public class Board extends BaseTimeEntity {
 		this.owner = member;
 		this.description = description;
 	}
+
 }
