@@ -15,20 +15,18 @@ public class PostRequestDto {
 	@NotNull(message = "작성자는 필수로 입력되어야 합니다.")
 	private Long memberId;
 
-	@NotNull(message = "게시판은 필수로 입력되어야 합니다")
-	private Board boardId;
-
 	@NotNull(message = "내용은 필수로 입력되어야 합니다.")//공백 또는 빈칸이 들어올 수 있음, Null이 아닌지만 체크
 	private String content;
 
 	private boolean anonymous;
 
 
-	public Post toEntity(Member writer) {
+	public Post toEntity(Member writer, Board board) {
 		return Post.builder()
 				.anonymous(anonymous)
 				.content(content)
 				.writer(writer)
+				.board(board)
 				.build();
 	}
 }

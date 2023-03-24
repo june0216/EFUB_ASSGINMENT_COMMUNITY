@@ -20,13 +20,14 @@ import java.util.List;
 public class PostService {
 	private final PostRepository postRepository;
 	private final MemberService memberService; //서비스 안에서 다른 서비스 호출 가능
+	private final BoardService boardService;
 
 
-
-	public Long create(PostRequestDto requestDto) {
+	public Long create(Long boardId, PostRequestDto requestDto) {
 		Member member = memberService.findById(requestDto.getMemberId());
-		Post board = postRepository.save(requestDto.toEntity(member));
-		return board.getPostId();
+		Board board = boardService.findById(boardId);
+		Post post = postRepository.save(requestDto.toEntity(member, board));
+		return post.getPostId();
 	}
 
 
@@ -57,8 +58,9 @@ public class PostService {
 		return postRepository.findByWriter(writer);
 	}
 	@Transactional(readOnly = true)
-	public List<Post> findPostsByBoard(Board board)
+	public List<Post> findPostsByBoard(Long boardId)
 	{
+		Board board = boardService.findById(boardId);
 		return postRepository.findAllByBoard(board);
 	}
 
