@@ -33,6 +33,7 @@ public class CommentRequestDto {
 	{
 		return Comment.builder()
 				.content(this.content)
+				.anonymous(this.anonymous)
 				.writer(account)
 				.post(post)
 				.build();

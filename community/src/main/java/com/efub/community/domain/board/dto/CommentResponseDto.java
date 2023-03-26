@@ -25,7 +25,7 @@ public class CommentResponseDto {
 		String writerName;
 		if(comment.isAnonymous())
 		{
-			writerName = "익명";
+			writerName = "익명" + comment.getCommentId();
 		}
 		else{
 			writerName = comment.getWriter().getNickname();
