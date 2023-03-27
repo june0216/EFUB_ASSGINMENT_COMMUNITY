@@ -60,7 +60,7 @@ public class PostController {
 
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String delete(@PathVariable final Long postId,  @RequestParam Long memberId) {
+	public String delete(@PathVariable final Long postId,  @RequestParam final Long memberId) {
 		postService.delete(postId, memberId);
 		return "성공적으로 삭제되었습니다.";
 	}
@@ -74,7 +74,7 @@ public class PostController {
 
 	@DeleteMapping("/hearts/{postHeartId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deletePostLike(@PathVariable Long postHeartId ,@RequestParam Long memberId) {
+	public String deletePostLike(@PathVariable Long postHeartId ,@RequestParam final Long memberId) {
 		postHeartService.delete(postHeartId, memberId);
 		return "좋아요가 취소되었습니다.";
 	}

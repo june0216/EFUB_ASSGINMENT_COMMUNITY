@@ -55,8 +55,8 @@ public class BoardController {
 
 	@DeleteMapping("/{boardId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deleteBoard(@PathVariable final Long boardId, @RequestBody @Valid MemberInfoRequestDto requestDto) {
-		boardService.delete(boardId, requestDto);
+	public String deleteBoard(@PathVariable final Long boardId,@RequestParam final Long memberId) {
+		boardService.delete(boardId, memberId);
 		return "성공적으로 삭제되었습니다.";
 	}
 }

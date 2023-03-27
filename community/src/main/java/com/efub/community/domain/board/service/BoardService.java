@@ -37,9 +37,9 @@ public class BoardService {
 		board.updateBoard(member, requestDto.getDescription());
 	}
 
-	public void delete(Long boardId, MemberInfoRequestDto requestDto) {
+	public void delete(Long boardId, Long memberId) {
 		Board board = findById(boardId);
-		checkValidMember(requestDto.getMemberId(), board.getOwner().getMemberId());
+		checkValidMember(memberId, board.getOwner().getMemberId());
 		boardRepository.delete(board);
 	}
 
