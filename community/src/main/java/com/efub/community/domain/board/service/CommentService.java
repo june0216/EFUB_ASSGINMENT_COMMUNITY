@@ -3,6 +3,7 @@ package com.efub.community.domain.board.service;
 import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.board.dto.CommentRequestDto;
+import com.efub.community.domain.board.dto.MemberInfoRequestDto;
 import com.efub.community.domain.board.repository.CommentRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -32,13 +33,23 @@ public class CommentService {
 
 	public void update(CommentRequestDto requestDto, Long commentId) {
 		Comment comment = findById(commentId);
+		checkValidMember(requestDto.getMemberId(), comment.getWriter().getMemberId());
 		comment.updateComment(requestDto.getContent());
 	}
 
-	public void delete(Long commentId) {
+	public void delete(Long commentId, MemberInfoRequestDto requestDto) {
 		Comment comment = findById(commentId);
+		checkValidMember(requestDto.getMemberId(), comment.getWriter().getMemberId());
 		commentRepository.delete(comment);
 	}
+
+	private void checkValidMember(Long currentMemberId, Long tagetMemberId){
+		if(currentMemberId != tagetMemberId)
+		{
+			throw new IllegalArgumentException();
+		}
+	}
+
 
 	// 연관관계 편의 메소드를 사용한 코드
 	@Transactional(readOnly = true)

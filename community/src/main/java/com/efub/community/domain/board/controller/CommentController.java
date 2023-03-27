@@ -3,6 +3,7 @@ package com.efub.community.domain.board.controller;
 import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.dto.CommentRequestDto;
 import com.efub.community.domain.board.dto.CommentResponseDto;
+import com.efub.community.domain.board.dto.MemberInfoRequestDto;
 import com.efub.community.domain.board.service.CommentService;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -44,8 +45,8 @@ public class CommentController {
 
 	@DeleteMapping("/{commentId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deleteComment(@PathVariable final Long commentId) {
-		commentService.delete(commentId);
+	public String deleteComment(@PathVariable final Long commentId, @RequestBody @Valid MemberInfoRequestDto requestDto) {
+		commentService.delete(commentId, requestDto);
 		return "성공적으로 삭제되었습니다.";
 	}
 }
