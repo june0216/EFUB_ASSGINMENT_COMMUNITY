@@ -2,6 +2,7 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;
+import com.efub.community.domain.board.dto.MemberInfoRequestDto;
 import com.efub.community.domain.board.dto.PostRequestDto;
 import com.efub.community.domain.board.repository.PostRepository;
 import com.efub.community.domain.member.domain.Member;
@@ -32,13 +33,22 @@ public class PostService {
 
 
 	public void update(Long postId, PostRequestDto requestDto) {
-		Post board = findById(postId);
-		board.updatePost(requestDto.getContent());
+		Post post = findById(postId);
+		checkValidMember(requestDto.getMemberId(), post.getWriter().getMemberId());
+		post.updatePost(requestDto.getContent());
 	}
 
-	public void delete(Long boardId) {
-		Post board = findById(boardId);
-		postRepository.delete(board);
+	public void delete(Long postId, MemberInfoRequestDto requestDto) {
+		Post post = findById(postId);
+		checkValidMember(requestDto.getMemberId(), post.getWriter().getMemberId());
+		postRepository.delete(post);
+	}
+
+	private void checkValidMember(Long currentMemberId, Long tagetMemberId){
+		if(currentMemberId != tagetMemberId)
+		{
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Transactional(readOnly = true)
