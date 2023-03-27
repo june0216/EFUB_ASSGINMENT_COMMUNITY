@@ -1,6 +1,7 @@
 package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Post;
+import com.efub.community.domain.board.dto.MemberInfoRequestDto;
 import com.efub.community.domain.board.dto.PostListResponseDto;
 import com.efub.community.domain.board.dto.PostRequestDto;
 import com.efub.community.domain.board.dto.PostResponseDto;
@@ -40,8 +41,8 @@ public class PostController {
 
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deletePost(@PathVariable final Long postId) {
-		postService.delete(postId);
+	public String deletePost(@PathVariable final Long postId, @RequestBody @Valid MemberInfoRequestDto requestDto) {
+		postService.delete(postId, requestDto);
 		return "성공적으로 삭제되었습니다.";
 	}
 
