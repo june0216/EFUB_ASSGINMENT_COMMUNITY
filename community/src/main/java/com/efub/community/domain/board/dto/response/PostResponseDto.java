@@ -1,4 +1,4 @@
-package com.efub.community.domain.board.dto;
+package com.efub.community.domain.board.dto.response;
 
 import com.efub.community.domain.board.domain.Post;
 import lombok.AccessLevel;
@@ -17,6 +17,8 @@ public class PostResponseDto {
 	private String boardName;
 	private String writerName;
 	private String content;
+	private Integer heartCount;
+	private Boolean isHeart;
 	private LocalDateTime createdDate;
 	private LocalDateTime modifiedDate;
 //TODO: 좋아요, 댓글 추가
@@ -39,5 +41,10 @@ public class PostResponseDto {
 				.createdDate(post.getCreatedDate())
 				.modifiedDate(post.getModifiedDate())
 				.build();
+	}
+	public void uploadHeart(Integer heartCount, boolean isHeart) {
+		this.heartCount = heartCount;
+		this.isHeart = isHeart;
+
 	}
 }
