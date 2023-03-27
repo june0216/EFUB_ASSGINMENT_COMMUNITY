@@ -1,4 +1,4 @@
-package com.efub.community.domain.board.dto;
+package com.efub.community.domain.board.dto.request;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;

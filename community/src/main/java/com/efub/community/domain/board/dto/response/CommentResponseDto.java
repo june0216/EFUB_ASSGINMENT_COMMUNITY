@@ -1,4 +1,4 @@
-package com.efub.community.domain.board.dto;
+package com.efub.community.domain.board.dto.response;
 
 import com.efub.community.domain.board.domain.Comment;
 import lombok.AccessLevel;
@@ -18,6 +18,9 @@ public class CommentResponseDto {
 	private String writerName;
 
 	private String content;
+	private Integer heartCount;
+	private Boolean isHeart;
+
 
 	private LocalDateTime modifiedDate;
 
@@ -37,5 +40,10 @@ public class CommentResponseDto {
 				.content(comment.getContent())
 				.modifiedDate(comment.getModifiedDate())
 				.build();
+	}
+	public void uploadHeart(Integer heartCount, boolean isHeart) {
+		this.heartCount = heartCount;
+		this.isHeart = isHeart;
+
 	}
 }
