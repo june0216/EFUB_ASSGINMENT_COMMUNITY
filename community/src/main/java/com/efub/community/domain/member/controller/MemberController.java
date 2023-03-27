@@ -52,12 +52,4 @@ public class MemberController {
 		return "성공적으로 탈퇴가 완료되었습니다";
 	}
 
-	@DeleteMapping("/{memberId}")
-	@ResponseStatus(value = HttpStatus.OK)
-	public String delete(@PathVariable long memberId)
-	{
-		memberService.delete(memberId);
-		return "성공적으로 탈퇴가 완료되었습니다";
-
-	}
 }

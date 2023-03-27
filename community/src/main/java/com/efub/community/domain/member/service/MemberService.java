@@ -41,11 +41,6 @@ public class MemberService {
 	}
 
 
-	public void delete(Long memberId) {
-		Member member = findById(memberId);
-		memberRepository.delete(member);
-	}
-
 	public void withdraw(Long memberId) {
 		Member member = findById(memberId);
 		member.withdraw();
