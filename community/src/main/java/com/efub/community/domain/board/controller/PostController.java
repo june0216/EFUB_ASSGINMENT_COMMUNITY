@@ -41,8 +41,8 @@ public class PostController {
 
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deletePost(@PathVariable final Long postId, @RequestBody @Valid MemberInfoRequestDto requestDto) {
-		postService.delete(postId, requestDto);
+	public String deletePost(@PathVariable final Long postId, @RequestParam final Long memberId) {
+		postService.delete(postId, memberId);
 		return "성공적으로 삭제되었습니다.";
 	}
 

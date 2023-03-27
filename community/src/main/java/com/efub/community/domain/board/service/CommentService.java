@@ -37,9 +37,9 @@ public class CommentService {
 		comment.updateComment(requestDto.getContent());
 	}
 
-	public void delete(Long commentId, MemberInfoRequestDto requestDto) {
+	public void delete(Long commentId, Long memberId) {
 		Comment comment = findById(commentId);
-		checkValidMember(requestDto.getMemberId(), comment.getWriter().getMemberId());
+		checkValidMember(memberId, comment.getWriter().getMemberId());
 		commentRepository.delete(comment);
 	}
 

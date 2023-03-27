@@ -45,8 +45,8 @@ public class CommentController {
 
 	@DeleteMapping("/{commentId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deleteComment(@PathVariable final Long commentId, @RequestBody @Valid MemberInfoRequestDto requestDto) {
-		commentService.delete(commentId, requestDto);
+	public String deleteComment(@PathVariable final Long commentId, @RequestParam final Long memberId) {
+		commentService.delete(commentId, memberId);
 		return "성공적으로 삭제되었습니다.";
 	}
 }
