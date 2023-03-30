@@ -19,6 +19,12 @@ public class BoardRequestDto {
 	private Long memberId;
 	private String description;
 
+	public BoardRequestDto(String name, Long memberId, String description) {
+		this.name = name;
+		this.memberId = memberId;
+		this.description = description;
+	}
+
 	public Board toEntity(Member member){
 		return Board.builder()
 				.name(name)

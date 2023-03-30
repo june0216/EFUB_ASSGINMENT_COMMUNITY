@@ -21,7 +21,7 @@ public class PostRequestDto {
 
 	private boolean anonymous;
 
-	@Builder
+
 	public PostRequestDto(String content, boolean anonymous) {
 		this.content = content;
 		this.anonymous = anonymous;

@@ -15,7 +15,7 @@ public class MemberResponseDto {
 	private String university;
 	private Integer studentNo;
 
-	@Builder
+
 	public MemberResponseDto(Member member) {
 		this.accountId = member.getMemberId();
 		this.email = member.getEmail();
