@@ -66,10 +66,10 @@ public class CommentController {
 		return "좋아요를 눌렀습니다.";
 	}
 
-	@DeleteMapping("/hearts/{commentHeartId}")
+	@DeleteMapping("/{commentId}/hearts")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deleteCommentLike(@PathVariable final Long commentHeartId, @RequestParam final Long accountId) {
-		commentHeartService.delete(commentHeartId, accountId);
+	public String deleteCommentLike(@PathVariable final Long commentId, @RequestParam final Long accountId) {
+		commentHeartService.delete(commentId, accountId);
 		return "좋아요가 취소되었습니다.";
 	}
 
