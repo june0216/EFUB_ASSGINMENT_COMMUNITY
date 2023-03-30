@@ -13,7 +13,6 @@ public class MemberUpdateRequestDto {
 	@NotBlank(message = "닉네임은 필수값입니다. ")
 	private String nickname;
 
-	@Builder
 	public MemberUpdateRequestDto(String nickname) {
 		this.nickname = nickname;
 	}
