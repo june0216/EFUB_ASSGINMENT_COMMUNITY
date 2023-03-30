@@ -1,6 +1,7 @@
 package com.efub.community.domain.chat.dto;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ public class MesssageRoomRequestDto {
 	private Long createdFrom;
 	private String message;
 
+	@Builder
 	public MesssageRoomRequestDto(Long initialSender, Long initialReceiver, Long createdFrom, String message) {
 		this.initialSender = initialSender;
 		this.initialReceiver = initialReceiver;
