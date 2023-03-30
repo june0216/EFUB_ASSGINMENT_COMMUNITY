@@ -40,16 +40,12 @@ public class CommentHeartService {
 		commentHeartRepository.save(commentHeart);
 	}
 
-	public void delete(Long commentHeartId, Long memberId) {
-		CommentHeart commentHeart = findById(commentHeartId);
-		checkValidMember(memberId, commentHeart.getWriter().getMemberId());
+	public void delete(Long commentId, Long memberId) {
+		Member member = memberService.findById(memberId);
+		Comment comment = commentService.findById(commentId);
+		CommentHeart commentHeart = commentHeartRepository.findByWriterAndComment(member, comment)
+				.orElseThrow(() -> new IllegalArgumentException("해당 좋아요가 없습니다."));
 		commentHeartRepository.delete(commentHeart);
-	}
-
-	private void checkValidMember(Long currentAccountId, Long tagetAccountId){
-		if(currentAccountId != tagetAccountId){
-			throw new IllegalArgumentException();
-		}
 	}
 
 	public boolean isHeart(Long accountId, Comment comment){

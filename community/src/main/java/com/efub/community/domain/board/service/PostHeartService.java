@@ -36,16 +36,12 @@ public class PostHeartService {
 				.build();
 		postHeartRepository.save(postHeart);
 	}
-	public void delete(Long postHeartId, Long memberId) {
-		PostHeart postHeart = findById(postHeartId);
-		checkValidMember(memberId, postHeart.getWriter().getMemberId());
+	public void delete(Long postId, Long memberId) {
+		Post post = postService.findById(postId);
+		Member member = memberService.findById(memberId);
+		PostHeart postHeart = postHeartRepository.findByWriterAndPost(member, post)
+				.orElseThrow(() -> new IllegalArgumentException("좋아요가 존재하지 않습니다."));
 		postHeartRepository.delete(postHeart);
-	}
-
-	private void checkValidMember(Long currentAccountId, Long tagetAccountId){
-		if(currentAccountId != tagetAccountId){
-			throw new IllegalArgumentException();
-		}
 	}
 
 	public boolean isHeart(Long accountId, Post post){
