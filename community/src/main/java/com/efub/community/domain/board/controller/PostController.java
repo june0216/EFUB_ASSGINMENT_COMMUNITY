@@ -30,7 +30,7 @@ public class PostController {
 
 	@GetMapping("/{postId}")
 	@ResponseStatus(value = HttpStatus.OK)// 글 1개 조회
-	public PostResponseDto readPost(@PathVariable Long postId, @RequestParam final Long memberId) {
+	public PostResponseDto readPost(@PathVariable final Long postId, @RequestParam final Long memberId) {
 		Post post = postService.findById(postId);
 		Integer heartCount = postHeartService.countPostHeart(post);
 		boolean isHeart = postHeartService.isHeart(memberId, post);
@@ -74,7 +74,7 @@ public class PostController {
 
 	@DeleteMapping("/{postId}/hearts")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String deletePostLike(@PathVariable Long postId ,@RequestParam final Long memberId) {
+	public String deletePostLike(@PathVariable final Long postId ,@RequestParam final Long memberId) {
 		postHeartService.delete(postId, memberId);
 		return "좋아요가 취소되었습니다.";
 	}
