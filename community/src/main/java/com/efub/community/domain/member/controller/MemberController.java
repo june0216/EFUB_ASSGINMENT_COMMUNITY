@@ -29,7 +29,7 @@ public class MemberController {
 	}
 	@GetMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public MemberResponseDto getMember(@PathVariable Long memberId)
+	public MemberResponseDto getMember(@PathVariable final Long memberId)
 	{
 		Member findMember = memberService.findById(memberId);
 		return new MemberResponseDto(findMember);
@@ -46,7 +46,7 @@ public class MemberController {
 
 	@PatchMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String withdraw(@PathVariable long memberId)
+	public String withdraw(@PathVariable final Long memberId)
 	{
 		memberService.withdraw(memberId);
 		return "성공적으로 탈퇴가 완료되었습니다";
