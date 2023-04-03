@@ -46,7 +46,7 @@ public class MemberController {
 
 	@PatchMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public String withdraw(@PathVariable long memberId)
+	public String withdraw(@PathVariable final long memberId)
 	{
 		memberService.withdraw(memberId);
 		return "성공적으로 탈퇴가 완료되었습니다";
