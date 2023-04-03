@@ -22,7 +22,7 @@ public class MemberBoardController {
 
 	@GetMapping("/posts")//작성자 별 글 조회
 	@ResponseStatus(value = HttpStatus.OK)
-	public PostListResponseDto readPostList(@PathVariable Long accountId) {
+	public PostListResponseDto readPostList(@PathVariable final Long accountId) {
 		List<Post> postList = postService.findByWriter(accountId);
 		return PostListResponseDto.of(postList);
 	}
