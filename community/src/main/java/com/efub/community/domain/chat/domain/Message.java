@@ -26,17 +26,17 @@ public class Message {
 	private MessageRoom messageRoom;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sender_id", referencedColumnName = "user_id")
-	private Member sender;
+	@JoinColumn(name = "writer_id", referencedColumnName = "user_id")
+	private Member writer;
 
 	@Column(name = "content", nullable = false, length = 300)
 	private String content;
 
 
 	@Builder
-	public Message(MessageRoom messageRoom, Member sender, String content) {
+	public Message(MessageRoom messageRoom, Member writer, String content) {
 		this.messageRoom = messageRoom;
-		this.sender = sender;
+		this.writer = writer;
 		this.content = content;
 	}
 }
