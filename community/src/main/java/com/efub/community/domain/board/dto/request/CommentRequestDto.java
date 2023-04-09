@@ -18,6 +18,7 @@ public class CommentRequestDto {
 	@NotNull(message = "내용은 필수로 입력되어야 합니다.")// 공백까지는 허용
 	private String content;
 
+	@NotNull(message = "익명여부는 필수로 입력해야 합니다.")
 	private boolean anonymous;
 
 	@Builder
