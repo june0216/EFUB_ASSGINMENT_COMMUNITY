@@ -1,4 +1,4 @@
-package com.efub.community.domain.member.dto;
+package com.efub.community.domain.member.dto.response;
 
 import com.efub.community.domain.member.domain.Member;
 import lombok.AccessLevel;

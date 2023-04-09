@@ -1,7 +1,11 @@
 package com.efub.community.domain.member.controller;
 
 import com.efub.community.domain.member.domain.Member;
-import com.efub.community.domain.member.dto.*;
+import com.efub.community.domain.member.dto.request.LoginRequestDto;
+import com.efub.community.domain.member.dto.request.MemberUpdateRequestDto;
+import com.efub.community.domain.member.dto.request.SignUpRequestDto;
+import com.efub.community.domain.member.dto.response.LoginResponseDto;
+import com.efub.community.domain.member.dto.response.MemberResponseDto;
 import com.efub.community.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
