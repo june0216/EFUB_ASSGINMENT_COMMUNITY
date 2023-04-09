@@ -1,9 +1,7 @@
 package com.efub.community.domain.member.controller;
 
 import com.efub.community.domain.member.domain.Member;
-import com.efub.community.domain.member.dto.MemberResponseDto;
-import com.efub.community.domain.member.dto.MemberUpdateRequestDto;
-import com.efub.community.domain.member.dto.SignUpRequestDto;
+import com.efub.community.domain.member.dto.*;
 import com.efub.community.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +24,14 @@ public class MemberController {
 		Long id = memberService.signUp(requestDto);
 		Member findMember = memberService.findById(id);
 		return new MemberResponseDto(findMember);
+	}
+
+	@PostMapping("/login")
+	@ResponseStatus(value = HttpStatus.OK)
+	public LoginResponseDto login(@RequestBody final LoginRequestDto requestDto)
+	{
+		Long memberId = memberService.login(requestDto);
+		return new LoginResponseDto(memberId);
 	}
 	@GetMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
