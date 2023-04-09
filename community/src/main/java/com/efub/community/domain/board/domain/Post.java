@@ -57,5 +57,6 @@ public class Post extends BaseTimeEntity {
 		this.content = content;
 	}
 
+
 }
 

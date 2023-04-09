@@ -40,4 +40,16 @@ public class Message extends BaseTimeEntity {
 		this.sender = sender;
 		this.content = content;
 	}
+
+	public void setMessageRoom(MessageRoom messageRoom) {
+		if (this.messageRoom != null) { // 기존에 존재한다면
+			this.messageRoom.getMessages().remove(this); // 관계를 끊는다.
+		}
+		this.messageRoom = messageRoom;
+		messageRoom.getMessages().add(this);
+		if(!messageRoom.getMessages().contains(this)) {
+			messageRoom.getMessages().add(this);
+		}
+	}
+
 }

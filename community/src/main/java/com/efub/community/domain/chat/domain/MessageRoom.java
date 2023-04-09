@@ -1,5 +1,6 @@
 package com.efub.community.domain.chat.domain;
 
+import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.global.common.BaseTimeEntity;
@@ -42,6 +43,10 @@ public class MessageRoom extends BaseTimeEntity {
 		this.initialReceiver = initialReceiver;
 		this.createdFrom = createdFrom;
 		this.messages = messages;
+	}
+
+	public void addMessage(Message message) {
+		message.setMessageRoom(this);
 	}
 
 

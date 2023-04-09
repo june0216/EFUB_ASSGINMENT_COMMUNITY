@@ -8,11 +8,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MessageRequestDto {
+	@NotNull
 	private Long messageRoomId;
+	@NotNull
 	private String content;
+	@NotNull
 	private Long senderId;
 
 	@Builder
