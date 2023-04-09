@@ -1,11 +1,9 @@
 package com.efub.community.domain.board.controller;
 
-import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;
-import com.efub.community.domain.board.dto.PostListResponseDto;
-import com.efub.community.domain.board.dto.PostRequestDto;
-import com.efub.community.domain.board.dto.PostResponseDto;
-import com.efub.community.domain.board.service.BoardService;
+import com.efub.community.domain.board.dto.response.PostListResponseDto;
+import com.efub.community.domain.board.dto.request.PostRequestDto;
+import com.efub.community.domain.board.dto.response.PostResponseDto;
 import com.efub.community.domain.board.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,8 @@
 package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Comment;
-import com.efub.community.domain.board.dto.CommentRequestDto;
-import com.efub.community.domain.board.dto.CommentResponseDto;
-import com.efub.community.domain.board.dto.MemberInfoRequestDto;
+import com.efub.community.domain.board.dto.request.CommentRequestDto;
+import com.efub.community.domain.board.dto.response.CommentResponseDto;
 import com.efub.community.domain.board.service.CommentService;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;

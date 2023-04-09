@@ -2,8 +2,7 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.domain.Post;
-import com.efub.community.domain.board.dto.CommentRequestDto;
-import com.efub.community.domain.board.dto.MemberInfoRequestDto;
+import com.efub.community.domain.board.dto.request.CommentRequestDto;
 import com.efub.community.domain.board.repository.CommentRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -27,7 +26,9 @@ public class CommentService {
 	public Long create(CommentRequestDto requestDto, Long postId) {
 		Member member = memberService.findById(requestDto.getMemberId());
 		Post post = postService.findById(postId);
-		Comment comment = commentRepository.save(requestDto.toEntity(post, member));
+		Comment comment = requestDto.toEntity(member);
+		comment.setPost(post);
+		commentRepository.save(comment);
 		return comment.getCommentId();
 	}
 

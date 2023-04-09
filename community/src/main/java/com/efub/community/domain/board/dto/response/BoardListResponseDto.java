@@ -1,7 +1,6 @@
-package com.efub.community.domain.board.dto;
+package com.efub.community.domain.board.dto.response;
 
 import com.efub.community.domain.board.domain.Board;
-import com.efub.community.domain.board.domain.Post;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

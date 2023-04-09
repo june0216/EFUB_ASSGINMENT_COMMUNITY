@@ -1,4 +1,4 @@
-package com.efub.community.domain.board.dto;
+package com.efub.community.domain.board.dto.request;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.member.domain.Member;
@@ -16,6 +16,7 @@ public class BoardRequestDto {
 	@NotBlank(message = "제목은 필수로 입력되어야 합니다.")
 	private String name;
 
+	@NotNull(message = "멤버 id는 필수로 입력되어야 합니다. ")
 	private Long memberId;
 	private String description;
 

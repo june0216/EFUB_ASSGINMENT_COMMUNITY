@@ -1,19 +1,13 @@
 package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Post;
-import com.efub.community.domain.board.dto.MemberInfoRequestDto;
-import com.efub.community.domain.board.dto.PostListResponseDto;
-import com.efub.community.domain.board.dto.PostRequestDto;
-import com.efub.community.domain.board.dto.PostResponseDto;
+import com.efub.community.domain.board.dto.request.PostRequestDto;
+import com.efub.community.domain.board.dto.response.PostResponseDto;
 import com.efub.community.domain.board.service.PostService;
-import com.efub.community.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @RestController

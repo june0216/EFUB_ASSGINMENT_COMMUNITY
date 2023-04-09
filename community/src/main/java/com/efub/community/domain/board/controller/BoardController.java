@@ -1,12 +1,9 @@
 package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Board;
-import com.efub.community.domain.board.domain.Post;
-import com.efub.community.domain.board.dto.*;
+import com.efub.community.domain.board.dto.request.BoardRequestDto;
+import com.efub.community.domain.board.dto.response.BoardListResponseDto;
 import com.efub.community.domain.board.service.BoardService;
-import com.efub.community.domain.board.service.PostService;
-import com.efub.community.domain.member.domain.Member;
-import com.efub.community.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
