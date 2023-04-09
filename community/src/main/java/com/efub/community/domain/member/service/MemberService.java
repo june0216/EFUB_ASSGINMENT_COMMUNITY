@@ -1,6 +1,7 @@
 package com.efub.community.domain.member.service;
 
 import com.efub.community.domain.member.domain.Member;
+import com.efub.community.domain.member.dto.LoginRequestDto;
 import com.efub.community.domain.member.dto.MemberUpdateRequestDto;
 import com.efub.community.domain.member.dto.SignUpRequestDto;
 import com.efub.community.domain.member.repository.MemberRepository;
@@ -49,6 +50,20 @@ public class MemberService {
 	public void withdraw(Long memberId) {
 		Member member = findById(memberId);
 		member.withdraw();
+	}
+
+	public Long login(LoginRequestDto requestDto){
+		Member member = findByStudentNo(requestDto.getStudentNo());
+		if(!member.getEncodedPassword().equals(requestDto.getPassword())){
+			throw new IllegalArgumentException();
+		}
+		return member.getMemberId();
+	}
+
+	@Transactional(readOnly = true)
+	public Member findByStudentNo(Integer studentNo){
+		return memberRepository.findByStudentNo(studentNo)
+				.orElseThrow(() -> new EntityNotFoundException("해당 학번을 가진 Member 를 찾을 수 없습니다."));
 	}
 
 	@Transactional(readOnly = true)
