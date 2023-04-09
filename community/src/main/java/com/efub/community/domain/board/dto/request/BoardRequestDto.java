@@ -16,6 +16,7 @@ public class BoardRequestDto {
 	@NotBlank(message = "제목은 필수로 입력되어야 합니다.")
 	private String name;
 
+	@NotNull(message = "멤버 id는 필수로 입력되어야 합니다. ")
 	private Long memberId;
 	private String description;
 

@@ -60,17 +60,16 @@ public class MemberService {
 		return member.getMemberId();
 	}
 
-
-	@Transactional(readOnly = true)
-	public Member findByStudentNo(Integer studentNo){
-		return memberRepository.findByStudentNo(studentNo)
-				.orElseThrow(() -> new EntityNotFoundException("해당 학번 를 가진 member 를 찾을 수 없습니다. email "));
-	}
-
 	@Transactional(readOnly = true)
 	public Member findById(Long id) {
 		return memberRepository.findByMemberId(id)
 				.orElseThrow(() -> new EntityNotFoundException("해당 id 를 가진 member 를 찾을 수 없습니다. id ="+id));
+	}
+
+	@Transactional(readOnly = true)
+	public Member findByStudentNo(Integer studentNo){
+		return memberRepository.findByStudentNo(studentNo)
+				.orElseThrow(() -> new EntityNotFoundException("해당 학번을 가진 Member 를 찾을 수 없습니다."));
 	}
 
 	@Transactional(readOnly=true)

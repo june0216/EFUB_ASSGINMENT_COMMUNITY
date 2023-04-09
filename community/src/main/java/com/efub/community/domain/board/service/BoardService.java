@@ -3,6 +3,7 @@ package com.efub.community.domain.board.service;
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.dto.request.BoardRequestDto;
 import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
+import com.efub.community.domain.board.dto.request.BoardRequestDto;
 import com.efub.community.domain.board.repository.BoardRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;

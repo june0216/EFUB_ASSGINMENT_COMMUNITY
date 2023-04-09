@@ -19,6 +19,7 @@ public class PostRequestDto {
 	@NotNull(message = "내용은 필수로 입력되어야 합니다.")//공백 또는 빈칸이 들어올 수 있음, Null이 아닌지만 체크
 	private String content;
 
+	@NotNull(message = "익명 여부는 필수로 입력되어야 합니다.")
 	private boolean anonymous;
 
 	@Builder

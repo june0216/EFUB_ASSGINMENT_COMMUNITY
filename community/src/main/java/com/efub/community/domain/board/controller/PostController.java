@@ -6,6 +6,8 @@ import com.efub.community.domain.board.dto.request.PostRequestDto;
 import com.efub.community.domain.board.dto.response.PostListResponseDto;
 import com.efub.community.domain.board.dto.response.PostResponseDto;
 import com.efub.community.domain.board.service.PostHeartService;
+import com.efub.community.domain.board.dto.request.PostRequestDto;
+import com.efub.community.domain.board.dto.response.PostResponseDto;
 import com.efub.community.domain.board.service.PostService;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -13,9 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @RestController

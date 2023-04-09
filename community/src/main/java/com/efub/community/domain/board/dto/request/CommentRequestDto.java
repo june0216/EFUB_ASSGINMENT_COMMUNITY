@@ -18,6 +18,7 @@ public class CommentRequestDto {
 	@NotNull(message = "내용은 필수로 입력되어야 합니다.")// 공백까지는 허용
 	private String content;
 
+	@NotNull(message = "익명 여부는 필수로 입력되어야 합니다.")
 	private boolean anonymous;
 
 	@Builder
@@ -29,13 +30,12 @@ public class CommentRequestDto {
 
 
 
-	public Comment toEntity(Post post, Member account)
+	public Comment toEntity(Member account)
 	{
 		return Comment.builder()
 				.content(this.content)
 				.anonymous(this.anonymous)
 				.writer(account)
-				.post(post)
 				.build();
 
 	}

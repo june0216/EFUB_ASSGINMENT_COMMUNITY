@@ -34,7 +34,6 @@ public class MemberController {
 		Long memberId = memberService.login(requestDto);
 		return new LoginResponseDto(memberId);
 	}
-
 	@GetMapping("/{memberId}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public MemberResponseDto getMember(@PathVariable final Long memberId)

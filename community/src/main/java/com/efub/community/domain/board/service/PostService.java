@@ -2,6 +2,7 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.domain.Post;
+import com.efub.community.domain.board.dto.request.PostRequestDto;
 import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.dto.request.PostRequestDto;
 import com.efub.community.domain.board.repository.PostRepository;

@@ -41,6 +41,15 @@ public class Comment extends BaseTimeEntity {
 		this.anonymous =anonymous;
 	}
 
+	public void setPost(Post post) {
+		if (this.post != null) { // 기존에 존재한다면
+			this.post.getCommentList().remove(this); // 관계를 끊는다.
+		}
+		this.post = post;
+		if(!post.getCommentList().contains(this)) {
+			post.getCommentList().add(this);
+		}
+	}
 	public void updateComment(String content) {
 		this.content = content;
 	}
