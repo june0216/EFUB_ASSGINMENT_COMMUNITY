@@ -26,7 +26,7 @@ public class Post extends BaseTimeEntity {
 	@Column(columnDefinition = "TEXT")// @NotNull은 @Column(nullable=false)의 역할도 같이 하므로 생략
 	private String content;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne//(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "post_id", insertable = false, updatable = false)
 	private Board board;
 
