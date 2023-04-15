@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service//서비스 레이어, 내부에서 자바 로직을 처리함
 @Transactional
@@ -47,10 +49,46 @@ public class MessageRoomService {
 
 	}
 
+	public Long checkMessageRoom(Long senderId, Long receiverId, Long createdFrom){
+		MessageRoom messageRoom = findByInitialSenderAndInitialReceiverAndCreatedFrom(senderId, receiverId, createdFrom);
+		return messageRoom.getMessageRoomId();
+	}
+
+	public void delete(Long messageRoomId, Long memberId){
+		MessageRoom messageRoom = findById(messageRoomId);
+		if(checkValidMember(memberId, messageRoom.getInitialReceiver().getMemberId()) || checkValidMember(memberId, messageRoom.getInitialSender().getMemberId())){
+			messageRoomRepository.delete(messageRoom);
+		}
+		else{
+			throw new IllegalArgumentException();
+		}
+
+	}
+
+	private boolean checkValidMember(Long currentMemberId, Long tagetMemberId){
+		if(currentMemberId == tagetMemberId)
+		{
+			return true;
+		}
+		return false;
+	}
+
+
 	@Transactional(readOnly = true)
 	public MessageRoom findById(Long messageRoomId){
 		return messageRoomRepository.findById(messageRoomId)
 				.orElseThrow(() -> new IllegalArgumentException("해당 messageRoom이 없습니다. id=" + messageRoomId));
+	}
+
+	@Transactional(readOnly = true)
+	public List<MessageRoom> findByOwner(Long memberId) {
+		Member owner = memberService.findById(memberId);
+		return messageRoomRepository.findByInitialSenderOrInitialReceiver(owner, owner);
+	}
+
+	@Transactional(readOnly = true)
+	public MessageRoom findByInitialSenderAndInitialReceiverAndCreatedFrom(Long senderId, Long receiverId, Long createdFrom){
+		return messageRoomRepository.findByInitialReceiverAndInitialSenderAndCreatedFrom(senderId, receiverId, createdFrom);
 	}
 
 }

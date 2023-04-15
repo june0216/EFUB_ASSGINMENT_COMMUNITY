@@ -1,6 +1,7 @@
 package com.efub.community.domain.chat.controller;
 
 import com.efub.community.domain.chat.domain.MessageRoom;
+import com.efub.community.domain.chat.dto.MessageRoomCheckResponseDto;
 import com.efub.community.domain.chat.dto.MessageRoomListResponseDto;
 import com.efub.community.domain.chat.dto.MessageRoomRequestDto;
 import com.efub.community.domain.chat.dto.MessageRoomResponseDto;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -27,5 +29,33 @@ public class MessageRoomController {
 		MessageRoom messageRoom = messageRoomService.findById(id);
 		return new MessageRoomResponseDto(messageRoom);
 	}
+
+	@GetMapping
+	@ResponseStatus(value = HttpStatus.OK)
+	public MessageRoomListResponseDto getMessageRoomList(@RequestParam final Long memberId)
+	{
+		List<MessageRoom> messageRoomList = messageRoomService.findByOwner(memberId);
+		return MessageRoomListResponseDto.of(messageRoomList);
+	}
+
+	///messageRooms?senderId={member_id}?receiverId={member_id}?createdFrom={post_id}
+	@GetMapping
+	@ResponseStatus(value = HttpStatus.OK)
+	public MessageRoomCheckResponseDto checkMessageRoom(@RequestParam final Long senderId, @RequestParam final Long receiverId, @RequestParam final Long createdFrom)
+	{
+		Long id = messageRoomService.checkMessageRoom(senderId, receiverId, createdFrom);
+		return new MessageRoomCheckResponseDto(id);
+	}
+
+	@DeleteMapping("/{messageRoomId}")
+	@ResponseStatus(value = HttpStatus.OK)
+	public String deleteMessageRoom(@PathVariable final Long messageRoomId, @RequestParam final Long memberId)
+	{
+		messageRoomService.delete(messageRoomId, memberId);
+		return "성공적으로 삭제되었습니다.";
+	}
+
+
+
 
 }

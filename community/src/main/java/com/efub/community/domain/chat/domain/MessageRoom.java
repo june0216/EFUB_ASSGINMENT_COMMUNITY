@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity//해당 클래스에 있는 내부변수에 모두 @Column을 내부적으로 포함 -> 옵셥없으면 생략 가능
@@ -47,6 +48,12 @@ public class MessageRoom extends BaseTimeEntity {
 
 	public void addMessage(Message message) {
 		message.setMessageRoom(this);
+	}
+
+	public Message getLatestMessage() {
+		return messages.stream()
+				.max(Comparator.comparing(BaseTimeEntity::getCreatedDate))
+				.orElseThrow(() -> new RuntimeException("No messages found in the message room"));
 	}
 
 
