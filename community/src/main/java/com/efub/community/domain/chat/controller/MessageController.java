@@ -2,10 +2,7 @@ package com.efub.community.domain.chat.controller;
 
 import com.efub.community.domain.chat.domain.Message;
 import com.efub.community.domain.chat.domain.MessageRoom;
-import com.efub.community.domain.chat.dto.MessageRequestDto;
-import com.efub.community.domain.chat.dto.MessageResponseDto;
-import com.efub.community.domain.chat.dto.MessageRoomRequestDto;
-import com.efub.community.domain.chat.dto.MessageRoomResponseDto;
+import com.efub.community.domain.chat.dto.*;
 import com.efub.community.domain.chat.service.MessageService;
 import com.efub.community.domain.member.domain.Member;
 import lombok.Builder;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -31,5 +29,7 @@ public class MessageController {
 		Message message = messageService.findById(id);
 		return new MessageResponseDto(message);
 	}
+
+
 
 }

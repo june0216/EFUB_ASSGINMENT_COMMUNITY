@@ -25,6 +25,7 @@ public class MessageRoomService {
 	private final MessageRoomRepository messageRoomRepository;
 	private final MemberService memberService;
 	private final PostService postService;
+	private final MessageService messageService;
 	private final MessageRepository messageRepository;
 
 
@@ -52,6 +53,15 @@ public class MessageRoomService {
 	public Long checkMessageRoom(Long senderId, Long receiverId, Long createdFrom){
 		MessageRoom messageRoom = findByInitialSenderAndInitialReceiverAndCreatedFrom(senderId, receiverId, createdFrom);
 		return messageRoom.getMessageRoomId();
+	}
+	public List<Message> readMessages(MessageRoom messageRoom, Member member)
+	{
+		if(checkValidMember(member.getMemberId(), messageRoom.getInitialReceiver().getMemberId()) || checkValidMember(member.getMemberId(), messageRoom.getInitialSender().getMemberId())){
+			return findMessagesByMessageRoomId(messageRoom.getMessageRoomId());
+		}
+		else{
+			throw new IllegalArgumentException();
+		}
 	}
 
 	public void delete(Long messageRoomId, Long memberId){
@@ -90,5 +100,14 @@ public class MessageRoomService {
 	public MessageRoom findByInitialSenderAndInitialReceiverAndCreatedFrom(Long senderId, Long receiverId, Long createdFrom){
 		return messageRoomRepository.findByInitialReceiverAndInitialSenderAndCreatedFrom(senderId, receiverId, createdFrom);
 	}
+
+	@Transactional(readOnly = true)
+	public List<Message> findMessagesByMessageRoomId(Long messageRoomId)
+	{
+		return messageRoomRepository.findMessagesByMessageRoomId(messageRoomId);
+	}
+
+
+
 
 }

@@ -22,7 +22,7 @@ public class MessageRoomResponseDto {
 	public MessageRoomResponseDto(MessageRoom messageRoom) {
 		this.initialSender = messageRoom.getInitialSender().getMemberId();
 		this.initialReceiver = messageRoom.getInitialReceiver().getMemberId();
-		this.message = messageRoom.getMessages().get(0).getContent();
+		this.message = messageRoom.getLatestMessage().getContent();
 		this.createdFrom = messageRoom.getCreatedFrom().getPostId();
 		this.createdDate = messageRoom.getCreatedDate();
 	}
