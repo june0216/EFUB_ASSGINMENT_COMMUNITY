@@ -9,6 +9,8 @@ import com.efub.community.domain.chat.repository.MessageRepository;
 import com.efub.community.domain.chat.repository.MessageRoomRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
+import com.efub.community.domain.notification.entity.NotificationType;
+import com.efub.community.domain.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class MessageRoomService {
 	private final PostService postService;
 	private final MessageService messageService;
 	private final MessageRepository messageRepository;
+	private final NotificationService notificationService;
 
 
 	public Long createMessageRoom(MessageRoomRequestDto messageRoomRequestDto)
@@ -46,6 +49,8 @@ public class MessageRoomService {
 		message.setMessageRoom(messageRoom);
 		messageRoomRepository.save(messageRoom);
 		messageRepository.save(message);
+		notificationService.createNotification(NotificationType.MESSAGEROOM, receiver);
+
 		return messageRoom.getMessageRoomId();
 
 	}

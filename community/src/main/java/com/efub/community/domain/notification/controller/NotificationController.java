@@ -2,8 +2,7 @@ package com.efub.community.domain.notification.controller;
 
 import com.efub.community.domain.notification.dto.NotificationListResponseDto;
 import com.efub.community.domain.notification.entity.Notification;
-import com.efub.community.domain.notification.service.NotifiactionService;
-import lombok.Getter;
+import com.efub.community.domain.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/notifications")
 @RequiredArgsConstructor
 public class NotificationController {
-	private final NotifiactionService notificationService;
+	private final NotificationService notificationService;
 
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)

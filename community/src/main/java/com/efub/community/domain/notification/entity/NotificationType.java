@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum NotificationType {
-	REGISTERED(1, "댓글", "새로운 댓글이 달렸습니다."),
-	UNREGISTERED(2, "쪽지방", "새로운 쪽지방이 생성되었습니다.");
+	COMMENT(1, "댓글", "새로운 댓글이 달렸습니다."),
+	MESSAGEROOM(2, "쪽지방", "새로운 쪽지방이 생성되었습니다.");
 
 	private final Integer Id;
 

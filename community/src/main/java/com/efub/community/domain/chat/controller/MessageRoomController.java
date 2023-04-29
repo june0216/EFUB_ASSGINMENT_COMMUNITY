@@ -50,7 +50,6 @@ public class MessageRoomController {
 		return MessageListResponseDto.of(messageList, messageRoom, currentMember);
 	}
 
-	///messageRooms?senderId={member_id}?receiverId={member_id}?createdFrom={post_id}
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
 	public MessageRoomCheckResponseDto checkMessageRoom(@RequestParam final Long senderId, @RequestParam final Long receiverId, @RequestParam final Long createdFrom)
