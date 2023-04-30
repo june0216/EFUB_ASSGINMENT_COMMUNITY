@@ -1,5 +1,6 @@
 package com.efub.community.domain.chat.repository;
 
+import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.chat.domain.Message;
 import com.efub.community.domain.chat.domain.MessageRoom;
 import com.efub.community.domain.member.domain.Member;
@@ -11,6 +12,7 @@ import java.util.Optional;
 public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> {
 
 	List<MessageRoom> findByInitialSenderOrInitialReceiver(Member sender, Member receiver);
-	List<Message> findMessagesByMessageRoomId(Long messageRoomId);
-	MessageRoom findByInitialReceiverAndInitialSenderAndCreatedFrom(Long initialSender,Long initailReceiver, Long createdFrom );
+
+
+	Boolean existsByInitialSenderAndInitialReceiverAndCreatedFrom(Member senderId, Member receiverId, Post createdFrom);
 }

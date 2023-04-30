@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -27,9 +29,9 @@ public class MessageRoomService {
 	private final MessageRoomRepository messageRoomRepository;
 	private final MemberService memberService;
 	private final PostService postService;
-	private final MessageService messageService;
 	private final MessageRepository messageRepository;
 	private final NotificationService notificationService;
+
 
 
 	public Long createMessageRoom(MessageRoomRequestDto messageRoomRequestDto)
@@ -37,37 +39,39 @@ public class MessageRoomService {
 		Member sender = memberService.findById(messageRoomRequestDto.getInitialSender());
 		Member receiver = memberService.findById(messageRoomRequestDto.getInitialReceiver());
 		Post createdFrom = postService.findById(messageRoomRequestDto.getCreatedFrom());
-		MessageRoom messageRoom = MessageRoom.builder()
-			.initialSender(sender)
-			.initialReceiver(receiver)
-			.createdFrom(createdFrom)
-			.build();
-		Message message = Message.builder()
+		if(!existsByInitialSenderAndInitialReceiverAndCreatedFrom(sender, receiver, createdFrom))
+		{
+			Message message = Message.builder()
 				.content(messageRoomRequestDto.getMessage())
 				.sender(sender)
 				.build();
-		message.setMessageRoom(messageRoom);
-		messageRoomRepository.save(messageRoom);
-		messageRepository.save(message);
-		notificationService.createNotification(NotificationType.MESSAGEROOM, receiver);
+			List<Message> messages = new ArrayList<>();
+			messages.add(message);
+			MessageRoom messageRoom = messageRoomRequestDto.toEntity(receiver, sender, createdFrom, messages);
+			message.setMessageRoom(messageRoom);
+			messageRepository.save(message);
+			messageRoomRepository.save(messageRoom);
 
-		return messageRoom.getMessageRoomId();
+			notificationService.createNotification(NotificationType.MESSAGEROOM, receiver);
 
-	}
+			return messageRoom.getMessageRoomId();
 
-	public Long checkMessageRoom(Long senderId, Long receiverId, Long createdFrom){
-		MessageRoom messageRoom = findByInitialSenderAndInitialReceiverAndCreatedFrom(senderId, receiverId, createdFrom);
-		return messageRoom.getMessageRoomId();
-	}
-	public List<Message> readMessages(MessageRoom messageRoom, Member member)
-	{
-		if(checkValidMember(member.getMemberId(), messageRoom.getInitialReceiver().getMemberId()) || checkValidMember(member.getMemberId(), messageRoom.getInitialSender().getMemberId())){
-			return findMessagesByMessageRoomId(messageRoom.getMessageRoomId());
 		}
 		else{
 			throw new IllegalArgumentException();
 		}
+
+
 	}
+
+	public String checkMessageRoom(Long senderId, Long receiverId, Long createdFrom){
+		Member initialSender = memberService.findById(senderId);
+		Member initialReciever = memberService.findById(receiverId);
+		Post post = postService.findById(createdFrom);
+
+		return existsByInitialSenderAndInitialReceiverAndCreatedFrom(initialSender, initialReciever, post) ? "이미 존재하는 메시지 방입니다." : "존재하지 않는 방입니다.";
+	}
+
 
 	public void delete(Long messageRoomId, Long memberId){
 		MessageRoom messageRoom = findById(messageRoomId);
@@ -81,11 +85,7 @@ public class MessageRoomService {
 	}
 
 	private boolean checkValidMember(Long currentMemberId, Long tagetMemberId){
-		if(currentMemberId == tagetMemberId)
-		{
-			return true;
-		}
-		return false;
+		return currentMemberId == tagetMemberId ? true : false;
 	}
 
 
@@ -102,15 +102,11 @@ public class MessageRoomService {
 	}
 
 	@Transactional(readOnly = true)
-	public MessageRoom findByInitialSenderAndInitialReceiverAndCreatedFrom(Long senderId, Long receiverId, Long createdFrom){
-		return messageRoomRepository.findByInitialReceiverAndInitialSenderAndCreatedFrom(senderId, receiverId, createdFrom);
+	public boolean existsByInitialSenderAndInitialReceiverAndCreatedFrom(Member senderId, Member receiverId, Post createdFrom){
+		return messageRoomRepository.existsByInitialSenderAndInitialReceiverAndCreatedFrom(senderId, receiverId, createdFrom);
 	}
 
-	@Transactional(readOnly = true)
-	public List<Message> findMessagesByMessageRoomId(Long messageRoomId)
-	{
-		return messageRoomRepository.findMessagesByMessageRoomId(messageRoomId);
-	}
+
 
 
 

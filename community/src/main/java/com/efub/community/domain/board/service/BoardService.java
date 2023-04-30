@@ -53,7 +53,7 @@ public class BoardService {
 	@Transactional(readOnly = true)
 	public Board findById(Long boardId) {
 		return boardRepository.findById(boardId)
-				.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + boardId));
+				.orElseThrow(() -> new IllegalArgumentException("해당 게시판이 없습니다. id=" + boardId));
 	}
 	@Transactional(readOnly = true)
 	public List<Board> findAllDesc() {

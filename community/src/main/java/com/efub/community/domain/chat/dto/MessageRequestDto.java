@@ -14,15 +14,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MessageRequestDto {
 	@NotNull
-	private Long messageRoomId;
-	@NotNull
 	private String content;
 	@NotNull
 	private Long senderId;
 
 	@Builder
-	public MessageRequestDto(Long messageRoomId, String content, Long senderId) {
-		this.messageRoomId = messageRoomId;
+	public MessageRequestDto(String content, Long senderId) {
 		this.content = content;
 		this.senderId = senderId;
 	}

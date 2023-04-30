@@ -33,8 +33,8 @@ public class CommentService {
 		Comment comment = requestDto.toEntity(writer);
 		comment.setPost(post);
 		commentRepository.save(comment);
-		if(!writer.equals(comment.getWriter())){
-			notificationService.createNotification(NotificationType.COMMENT, writer);
+		if(writer.getMemberId() != post.getWriter().getMemberId()){
+			notificationService.createNotification(NotificationType.COMMENT, post.getWriter());
 		}
 		return comment.getCommentId();
 	}

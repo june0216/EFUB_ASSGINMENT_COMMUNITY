@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -18,12 +19,13 @@ import java.util.List;
 @RequiredArgsConstructor //final 키워드가 붙은 필드에 대해 생성자 자동 생성
 public class NotificationService {
 
-	private NotificationRepository notificationRepository;
-	private MemberService memberService;
+	private final NotificationRepository notificationRepository;
+	private final MemberService memberService;
 
 	public List<Notification> readAll(Long currentMemberId){
 		Member member = memberService.findById(currentMemberId);
-		return findByMemberId(member.getMemberId());
+		List<Notification> notifications = findByMemberId(member);
+		return notifications != null ? notifications : Collections.emptyList();
 	}
 
 	public void createNotification(NotificationType notificationType, Member member){
@@ -36,9 +38,10 @@ public class NotificationService {
 
 
 	@Transactional(readOnly = true)
-	public List<Notification> findByMemberId(Long memberId)
+	public List<Notification> findByMemberId(Member member)
 	{
-		return findByMemberId(memberId);
+		
+		return notificationRepository.findByMember(member);
 	}
 
 }

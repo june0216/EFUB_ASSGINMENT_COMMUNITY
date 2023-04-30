@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -25,13 +26,20 @@ public class MessageService {
 	private final MemberService memberService;
 	private final MessageRepository messageRepository;
 	private final MessageRoomService messageRoomService;
-	private final MessageRoomRepository messageRoomRepository;
-	public Long createMessage(MessageRequestDto request) {
+
+	public Long createMessage(Long messageRoomId, MessageRequestDto request) {
 		Member sender = memberService.findById(request.getSenderId());
-		MessageRoom messageRoom = messageRoomService.findById(request.getMessageRoomId());
+		MessageRoom messageRoom = messageRoomService.findById(messageRoomId);
 		checkValidOwner(request.getSenderId(), messageRoom);
 		Message message = messageRepository.save(request.toEntity(sender, messageRoom));
 		return message.getId();
+	}
+
+	public List<Message> readMessages(MessageRoom messageRoom, Member member)
+	{
+		checkValidOwner(member.getMemberId(), messageRoom);
+		List<Message> messages = findByMessageRoomMessageRoomId(messageRoom);
+		return messages != null ? messages : Collections.emptyList();
 	}
 
 	private void checkValidOwner(Long currentMemberId, MessageRoom messageRoom){
@@ -47,6 +55,12 @@ public class MessageService {
 	{
 		return messageRepository.findById(messageId)
 				.orElseThrow(() -> new IllegalArgumentException("해당 message가 없습니다. id=" + messageId));
+	}
+
+	@Transactional(readOnly = true)
+	public List<Message> findByMessageRoomMessageRoomId(MessageRoom messageRoom)
+	{
+		return messageRepository.findByMessageRoomMessageRoomId(messageRoom.getMessageRoomId());
 	}
 
 

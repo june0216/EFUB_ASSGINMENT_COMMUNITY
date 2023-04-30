@@ -16,6 +16,7 @@ public class MessageRoomResponseDto {
 	private Long initialReceiver;
 	private String message;
 	private Long createdFrom;
+	private Long messageRoomId;
 	private LocalDateTime createdDate;
 
 	@Builder
@@ -24,6 +25,7 @@ public class MessageRoomResponseDto {
 		this.initialReceiver = messageRoom.getInitialReceiver().getMemberId();
 		this.message = messageRoom.getLatestMessage().getContent();
 		this.createdFrom = messageRoom.getCreatedFrom().getPostId();
+		this.messageRoomId = messageRoom.getMessageRoomId();
 		this.createdDate = messageRoom.getCreatedDate();
 	}
 }

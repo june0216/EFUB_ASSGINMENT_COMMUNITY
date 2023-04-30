@@ -30,7 +30,6 @@ public class MessageRoomController {
 	{
 		Long id = messageRoomService.createMessageRoom(requestDto);
 		MessageRoom messageRoom = messageRoomService.findById(id);
-		Message message = messageService.findById(messageRoom.getMessageRoomId());
 		return new MessageRoomResponseDto(messageRoom);
 	}
 
@@ -41,21 +40,13 @@ public class MessageRoomController {
 		List<MessageRoom> messageRoomList = messageRoomService.findByOwner(memberId);
 		return MessageRoomListResponseDto.of(messageRoomList);
 	}
-	@GetMapping("/{messageRoomId}")
-	@ResponseStatus(value = HttpStatus.OK)
-	public MessageListResponseDto getMessageList(@PathVariable final Long messageRoomId, @RequestParam final Long memberId){
-		Member currentMember = memberService.findById(memberId);
-		MessageRoom messageRoom = messageRoomService.findById(messageRoomId);
-		List<Message> messageList = messageRoomService.readMessages(messageRoom,currentMember);
-		return MessageListResponseDto.of(messageList, messageRoom, currentMember);
-	}
 
-	@GetMapping
-	@ResponseStatus(value = HttpStatus.OK)
-	public MessageRoomCheckResponseDto checkMessageRoom(@RequestParam final Long senderId, @RequestParam final Long receiverId, @RequestParam final Long createdFrom)
+	@GetMapping("/check")
+	@ResponseStatus(value = HttpStatus.OK)//같은 글에서 초기 sender가 receiver이고 초기 receiver가 sender가 된다면 다른 메시지방 생성 가능
+	public String checkMessageRoom(@RequestParam final Long senderId, @RequestParam final Long receiverId, @RequestParam final Long createdFrom)
 	{
-		Long id = messageRoomService.checkMessageRoom(senderId, receiverId, createdFrom);
-		return new MessageRoomCheckResponseDto(id);
+		String isExisted = messageRoomService.checkMessageRoom(senderId, receiverId, createdFrom);
+		return isExisted;
 	}
 
 	@DeleteMapping("/{messageRoomId}")
