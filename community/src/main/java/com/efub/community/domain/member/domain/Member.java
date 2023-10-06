@@ -54,7 +54,9 @@ public class Member extends BaseTimeEntity {
 	}
 
 
-
+	public void setMemberId(Long memberId){ // test 코드 작성용으로만 사용
+		this.memberId = memberId;
+	}
 	public void updateMember(String nickname){
 		this.nickname = nickname;
 	}

@@ -57,12 +57,12 @@ class MemberTest {
 	@DisplayName("닉네임검사_성공")
 	void whenNicknameIsWithinLengthLimit_thenShouldNotHaveConstraintViolations() {
 		final String INVALID_EMAIL = "test@gmail.com";
-		final String TEST_NICKNAME = "정당한닉네임";
-		final String TEST_ENCODED_PASSWORD = "encodedPassword";
-		final String TEST_UNIVERSITY = "이화여자대학교";
-		final Integer TEST_STUDENT_ID = 1989001;
+		final String VALID_NICKNAME = "정당한닉네임";
+		final String VALID_ENCODED_PASSWORD = "encodedPassword";
+		final String VALID_UNIVERSITY = "이화여자대학교";
+		final Integer VALID_STUDENT_ID = 1989001;
 
-		Member member = createMember(INVALID_EMAIL, TEST_NICKNAME, TEST_ENCODED_PASSWORD, TEST_UNIVERSITY, TEST_STUDENT_ID);
+		Member member = createMember(INVALID_EMAIL, VALID_NICKNAME, VALID_ENCODED_PASSWORD, VALID_UNIVERSITY, VALID_STUDENT_ID);
 
 
 		Set<ConstraintViolation<Member>> violations = validator.validate(member);
@@ -72,12 +72,12 @@ class MemberTest {
 	@DisplayName("이메일형식검사_실패")
 	void whenEmailIsInvalid_thenShouldHaveConstraintViolations() {
 		final String INVALID_EMAIL = "testgmail.com";
-		final String TEST_NICKNAME = "테스트계정";
-		final String TEST_ENCODED_PASSWORD = "encodedPassword";
-		final String TEST_UNIVERSITY = "이화여자대학교";
-		final Integer TEST_STUDENT_ID = 1989001;
+		final String VALID_NICKNAME = "테스트계정";
+		final String VALID_ENCODED_PASSWORD = "encodedPassword";
+		final String VALID_UNIVERSITY = "이화여자대학교";
+		final Integer VALID_STUDENT_ID = 1989001;
 
-		Member member = createMember(INVALID_EMAIL, TEST_NICKNAME, TEST_ENCODED_PASSWORD, TEST_UNIVERSITY, TEST_STUDENT_ID);
+		Member member = createMember(INVALID_EMAIL, VALID_NICKNAME, VALID_ENCODED_PASSWORD, VALID_UNIVERSITY, VALID_STUDENT_ID);
 
 
 		Set<ConstraintViolation<Member>> violations = validator.validate(member);
