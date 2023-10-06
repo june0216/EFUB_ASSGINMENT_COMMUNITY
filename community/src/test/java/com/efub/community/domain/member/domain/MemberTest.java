@@ -9,63 +9,65 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class MemberTest {
 
+
+
 	@Test
-	void 계정_생성_테스트() {
-		String email = "test@gmail.com";
-		String nickname = "테스트계정";
-		String encodedPassword = "encodedPassword";
-		String university = "이화여자대학교";
-		Integer studentId = 1989001;
-		MemberStatus status = REGISTERED;
+	void createMember_WithInvalidEmail_ShouldThrowException() {
+		final String INVALID_EMAIL = "testgmail.com";
+		final String TEST_NICKNAME = "테스트계정";
+		final String TEST_ENCODED_PASSWORD = "encodedPassword";
+		final String TEST_UNIVERSITY = "이화여자대학교";
+		final Integer TEST_STUDENT_ID = 1989001;
+		final MemberStatus EXPECTED_STATUS = REGISTERED;
 
-		Member member = createMember(email, nickname, encodedPassword, university,studentId);
+		Member member = createMember(INVALID_EMAIL, TEST_NICKNAME, TEST_ENCODED_PASSWORD, TEST_UNIVERSITY, TEST_STUDENT_ID);
 
-		assertThat(member.getEmail()).isEqualTo(email);
-		assertThat(member.getNickname()).isEqualTo(nickname);
-		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
-		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentNo()).isEqualTo(studentId);
-		assertThat(member.getStatus()).isEqualTo(status);
+		assertThat(member.getEmail()).isEqualTo(INVALID_EMAIL);
+		assertThat(member.getNickname()).isEqualTo(TEST_NICKNAME);
+		assertThat(member.getEncodedPassword()).isEqualTo(TEST_ENCODED_PASSWORD);
+		assertThat(member.getUniversity()).isEqualTo(TEST_UNIVERSITY);
+		assertThat(member.getStudentNo()).isEqualTo(TEST_STUDENT_ID);
+		assertThat(member.getStatus()).isEqualTo(EXPECTED_STATUS);
 	}
 
+
 	@Test
-	void 계정_업데이트_테스트() {
-		String email = "test@gmail.com";
-		String nickname = "테스트계정";
-		String encodedPassword = "encodedPassword";
-		String university = "이화여자대학교";
-		Integer studentNo = 1989001;
-		String newNickname = "새테스트계정";
+	void updateMember_GivenRegisteredMember_ShouldChangeNickname() {
+		final String INITIAL_NICKNAME = "테스트계정";
+		final String UPDATED_NICKNAME = "새테스트계정";
 
-		Member member = createMember(email, nickname, encodedPassword, university, studentNo);
+		Member member = createDefaultMember();
+		member.updateMember(UPDATED_NICKNAME);
 
-		member.updateMember(newNickname);
-
-		assertThat(member.getNickname()).isEqualTo(newNickname);
-
+		assertThat(member.getNickname()).isEqualTo(UPDATED_NICKNAME);
 	}
 
-	@Test
-	void 계정_삭제_테스트() {
-		String email = "test@gmail.com";
-		String nickname = "테스트계정";
-		String encodedPassword = "encodedPassword";
-		String university = "이화여자대학교";
-		Integer studentNo = 1989001;
-		MemberStatus status = UNREGISTERED;
 
-		Member member = createMember(email, nickname, encodedPassword, university,studentNo);
+	@Test
+	void withdraw_GivenRegisteredMember_ShouldSetStatusToUnregistered() {
+		final MemberStatus EXPECTED_STATUS = UNREGISTERED;
+
+		Member member = createDefaultMember();
 		member.withdraw();
 
-		assertThat(member.getEmail()).isEqualTo(email);
-		assertThat(member.getNickname()).isEqualTo(nickname);
-		assertThat(member.getEncodedPassword()).isEqualTo(encodedPassword);
-		assertThat(member.getUniversity()).isEqualTo(university);
-		assertThat(member.getStudentNo()).isEqualTo(studentNo);
-		assertThat(member.getStatus()).isEqualTo(status);
+		assertThat(member.getStatus()).isEqualTo(EXPECTED_STATUS);
 	}
 
+	private Member createDefaultMember() {
+		final String TEST_EMAIL = "test@gmail.com";
+		final String TEST_NICKNAME = "테스트계정";
+		final String TEST_ENCODED_PASSWORD = "encodedPassword";
+		final String TEST_UNIVERSITY = "이화여자대학교";
+		final Integer TEST_STUDENT_NO = 1989001;
 
+		return Member.builder()
+				.email(TEST_EMAIL)
+				.nickname(TEST_NICKNAME)
+				.encodedPassword(TEST_ENCODED_PASSWORD)
+				.university(TEST_UNIVERSITY)
+				.studentNo(TEST_STUDENT_NO)
+				.build();
+	}
 
 	private Member createMember(String email, String name, String encodedPassword, String university, Integer studentNo) {
 		Member member = Member.builder()
@@ -73,7 +75,6 @@ class MemberTest {
 				.nickname(name)
 				.encodedPassword(encodedPassword)
 				.university(university)
-
 				.studentNo(studentNo)
 				.build();
 		return member;
