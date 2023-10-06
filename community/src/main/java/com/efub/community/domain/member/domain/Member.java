@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 import static com.efub.community.domain.member.domain.MemberStatus.REGISTERED;
 import static com.efub.community.domain.member.domain.MemberStatus.UNREGISTERED;
@@ -22,6 +23,8 @@ public class Member extends BaseTimeEntity {
 	private Long memberId;
 
 	@Column(nullable = false, unique = true, length = 60)//DB에 저장될 때 조건(물리적인 데이터베이스 컬럼의 특성을 나타냄), 유효성 체크를 해주지는 않음
+	@Email(message = "유효하지 않은 이메일 형식입니다.",
+			regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
 	private String email;
 
 
