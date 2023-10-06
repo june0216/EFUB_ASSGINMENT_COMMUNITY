@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,10 +22,10 @@ public class Post extends BaseTimeEntity {
 	@Column(name = "post_id")
 	private Long postId;
 
-	@Column(columnDefinition = "TEXT")// @NotNull은 @Column(nullable=false)의 역할도 같이 하므로 생략
+	@Column(nullable=false, columnDefinition = "TEXT")
 	private String content;
 
-	@OneToOne//(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne
 	@JoinColumn(name = "post_id", insertable = false, updatable = false)
 	private Board board;
 
@@ -54,6 +53,9 @@ public class Post extends BaseTimeEntity {
 
 	public void updatePost(String content)
 	{
+		if(content == null){
+			throw new IllegalArgumentException();
+		}
 		this.content = content;
 	}
 

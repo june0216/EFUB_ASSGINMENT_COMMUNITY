@@ -1,6 +1,9 @@
 package com.efub.community.domain.board.domain;
 
+import com.efub.community.domain.board.domain.builder.BoardBuilder;
 import com.efub.community.domain.member.domain.Member;
+import com.efub.community.domain.member.domain.MemberBuilder;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,13 +11,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
+    private Member validOwner;
 
+    @BeforeEach
+    public void setUp(){
+        validOwner = MemberBuilder.build();
+    }
 
     @Test
     @DisplayName("게시판_업데이트_성공")
     void updateBoard_GivenValidContent_ShouldUpdateContent(){
-        Member validOwner = createDefaultMember();
-        Board board = createDefaultBoard(validOwner);
+        final Member validOwner = MemberBuilder.build(1L);
+        final Board board = BoardBuilder.build(validOwner);
         final String UPDATE_VALID_CONTENT = "update";
 
         //when
@@ -28,12 +36,10 @@ class BoardTest {
     @Test
     @DisplayName("게시판_업데이트_실패_null_description")
     void updateBoard_WithNullDescription_ShouldFail() {
-        Member validOwner = createDefaultMember();
-        Board board = createDefaultBoard(validOwner);
+        final Board board = BoardBuilder.build(validOwner);
         final String UPDATE_INVALID_CONTENT = null;
 
-
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             board.updateBoard(validOwner, UPDATE_INVALID_CONTENT);
         });
     }
@@ -41,14 +47,11 @@ class BoardTest {
     @Test
     @DisplayName("게시판_업데이트_실패_invalid_owner")
     void updateBoard_WithNullOwner_ShouldFail() {
-        final Long validOwnerId = 1L;
         final Long invalidOwnerId = 2l;
-        Member validOwner = createDefaultMember();
-        validOwner.setMemberId(validOwnerId);
-        Member invalidOwner = createDefaultMember();
-        invalidOwner.setMemberId(invalidOwnerId);
+        final Member invalidOwner = MemberBuilder.build(invalidOwnerId);
 
-        Board board = createDefaultBoard(validOwner);
+
+        final Board board = BoardBuilder.build(validOwner);
         final String VALID_DESCRIPTION = "update content";
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -58,31 +61,4 @@ class BoardTest {
 
 
 
-
-    private Board createDefaultBoard(Member owner){
-        final String VALID_NAME = "board_name";
-        final String VALID_DESCRIPTION = "this is board";
-        final Member VALID_OWNER = owner;
-        return Board.builder()
-                .name(VALID_NAME)
-                .description(VALID_DESCRIPTION)
-                .owner(VALID_OWNER)
-                .build();
-    }
-
-    private Member createDefaultMember() {
-        final String TEST_EMAIL = "test@gmail.com";
-        final String TEST_NICKNAME = "테스트계정";
-        final String TEST_ENCODED_PASSWORD = "encodedPassword";
-        final String TEST_UNIVERSITY = "이화여자대학교";
-        final Integer TEST_STUDENT_NO = 1989001;
-
-        return Member.builder()
-                .email(TEST_EMAIL)
-                .nickname(TEST_NICKNAME)
-                .encodedPassword(TEST_ENCODED_PASSWORD)
-                .university(TEST_UNIVERSITY)
-                .studentNo(TEST_STUDENT_NO)
-                .build();
-    }
 }

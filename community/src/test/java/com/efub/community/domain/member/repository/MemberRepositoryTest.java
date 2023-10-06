@@ -13,7 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.efub.community.domain.member.domain.MemberStatus.REGISTERED;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -23,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE,
         connection = EmbeddedDatabaseConnection.H2)
 class MemberRepositoryTest {
+
     @Autowired
     private MemberRepository memberRepository;
 
@@ -125,6 +129,7 @@ class MemberRepositoryTest {
 
         testEntityManager.clear(); // 여기서 영속성 컨텍스트 초기화
     }
+
     private Member createMember(String email, String name, String encodedPassword, String university, Integer studentNo) {
         Member member = Member.builder()
                 .email(email)

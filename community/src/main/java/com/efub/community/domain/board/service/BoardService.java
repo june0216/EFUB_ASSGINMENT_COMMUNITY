@@ -2,7 +2,6 @@ package com.efub.community.domain.board.service;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.dto.request.BoardRequestDto;
-import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
 import com.efub.community.domain.board.repository.BoardRepository;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
@@ -32,7 +31,6 @@ public class BoardService {
 
 	public void update(Long boardId, BoardRequestDto requestDto) {
 		Board board = findById(boardId);
-		checkValidMember(requestDto.getMemberId(), board.getOwner().getMemberId());
 		Member member = memberService.findById(requestDto.getMemberId());
 		board.updateBoard(member, requestDto.getDescription());
 	}
@@ -44,7 +42,7 @@ public class BoardService {
 	}
 
 	private void checkValidMember(Long currentMemberId, Long tagetMemberId){
-		if(currentMemberId != tagetMemberId)
+		if(currentMemberId.equals(tagetMemberId))
 		{
 			throw new IllegalArgumentException();
 		}
