@@ -74,14 +74,15 @@ class PostRepositoryTest {
     @DisplayName("작성자_게시글_조회_실패_다른작성자")
     void findByWriter_GivenInvalidWriter_ShouldNotBeDifferent() {
         // Given
+        final Member invalidMember = MemberBuilder.build(3L);
         final Post firstPost = createDefaultPost(savedValidWriter, savedValidBoard);
         final Post secondPost = createDefaultPost(savedValidWriter, savedValidBoard);
 
         // When
-        final List<Post> posts = postRepository.findByWriter(savedValidWriter);
+        final List<Post> posts = postRepository.findByWriter(invalidMember);
 
         // Then
-        assertThat(posts).hasSize(2);
+        assertThat(posts).isEmpty();
     }
 
     @Test
