@@ -14,8 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -57,6 +59,30 @@ class MemberSignUpServiceTest {
 
         //then
         assertThat(signUpMemberId).isEqualTo(member.getMemberId());
+    }
+
+    @Test
+    @DisplayName("회원가입_실패_중복학번")
+    void signUp_GivenExistedStudentNo_ShouldFail() {
+        //given
+        final String VALID_EMAIL = member.getEmail();
+        final String VALID_NICKNAME = member.getNickname();
+        final String VALID_ENCODED_PASSWORD = member.getEncodedPassword();
+        final String VALID_UNIVERSITY = member.getUniversity();
+        final Integer EXISTED_STUDENT_NO = member.getStudentNo();
+
+        final SignUpRequestDto dto = SignUpRequestDto.builder()
+                .email(VALID_EMAIL)
+                .university(VALID_UNIVERSITY)
+                .nickname(VALID_NICKNAME)
+                .password(VALID_ENCODED_PASSWORD)
+                .studentNo(EXISTED_STUDENT_NO)
+                .build();
+
+        when(memberRepository.existsByStudentNo(dto.getStudentNo())).thenReturn(true);
+
+        //when -then
+        assertThrows(IllegalArgumentException.class, () -> memberService.signUp(dto));
     }
 
 
