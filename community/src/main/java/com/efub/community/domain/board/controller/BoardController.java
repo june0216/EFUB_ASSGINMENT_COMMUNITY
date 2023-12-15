@@ -2,7 +2,7 @@ package com.efub.community.domain.board.controller;
 
 import com.efub.community.domain.board.domain.Board;
 import com.efub.community.domain.board.dto.request.BoardRequestDto;
-import com.efub.community.domain.board.dto.request.MemberInfoRequestDto;
+
 import com.efub.community.domain.board.dto.response.BoardListResponseDto;
 import com.efub.community.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Slf4j

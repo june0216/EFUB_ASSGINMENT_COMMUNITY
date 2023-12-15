@@ -1,6 +1,5 @@
 package com.efub.community.domain.chat.domain;
 
-import com.efub.community.domain.board.domain.Comment;
 import com.efub.community.domain.board.domain.Post;
 import com.efub.community.domain.member.domain.Member;
 import com.efub.community.global.common.BaseTimeEntity;
@@ -9,7 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

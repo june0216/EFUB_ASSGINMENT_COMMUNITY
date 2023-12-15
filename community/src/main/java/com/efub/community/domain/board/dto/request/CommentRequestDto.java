@@ -1,14 +1,14 @@
 package com.efub.community.domain.board.dto.request;
 
 import com.efub.community.domain.board.domain.Comment;
-import com.efub.community.domain.board.domain.Post;
+
 import com.efub.community.domain.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

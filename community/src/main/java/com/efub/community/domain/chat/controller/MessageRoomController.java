@@ -1,18 +1,16 @@
 package com.efub.community.domain.chat.controller;
 
-import com.efub.community.domain.chat.domain.Message;
 import com.efub.community.domain.chat.domain.MessageRoom;
 import com.efub.community.domain.chat.dto.*;
 import com.efub.community.domain.chat.service.MessageRoomService;
 import com.efub.community.domain.chat.service.MessageService;
-import com.efub.community.domain.member.domain.Member;
 import com.efub.community.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Slf4j

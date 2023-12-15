@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import static com.efub.community.domain.member.domain.MemberStatus.REGISTERED;
 import static com.efub.community.domain.member.domain.MemberStatus.UNREGISTERED;
